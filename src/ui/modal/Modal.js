@@ -1,6 +1,7 @@
 import React from 'react';
 import Aux from '../../hoc/Aux';
 import Backdrop from '../backdrop/Backdrop';
+import Button from '../button/Button';
 import classes from './Modal.css'
 
 const modal = (props) => (
@@ -13,7 +14,11 @@ const modal = (props) => (
                 transform: props.show ? 'translateY(0)' : 'translateY(-100vh)',
                 opacity: props.show ? '1' : '0'
             }}>
+
             {props.children}
+
+            <Button clicked={props.continuePurchase} type="Success">Continue</Button>
+            <Button clicked={props.cancelPurchase} type="Danger">Cancel</Button>
         </div>
     </Aux>
 
