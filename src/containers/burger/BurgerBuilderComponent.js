@@ -12,10 +12,10 @@ const INGREDIENTS_PRICE = {
 class BurgerBuilderComponent extends Component {
     state = {
         ingredients: {
-            meat: 1,
-            salad: 1,
-            cheese: 1,
-            bacon: 1
+            meat: 0,
+            salad: 0,
+            cheese: 0,
+            bacon: 0
         },
         totalPrice: 4,
         purchasable: false
@@ -72,9 +72,11 @@ class BurgerBuilderComponent extends Component {
             <div>
                 <Burger ingredients={this.state.ingredients}/>
                 <IngredientsBuilder
+                    totalPrice={this.state.totalPrice}
                     ingredients={this.state.ingredients}
                     addIngredient={this.addIngredient}
-                    removeIngredient={this.removeIngredient}/>
+                    removeIngredient={this.removeIngredient}
+                    purchasable={this.state.purchasable}/>
             </div>
         );
     }
