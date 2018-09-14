@@ -26,7 +26,8 @@ const burgerBuilder = (props) => {
             {ingredientControllers}
             <button
                 className={buttonCssClasses.OrderButton}
-                disabled={!props.purchasable}>ORDER NOW</button>
+                disabled={!props.purchasable}
+                onClick={props.purchasing}>ORDER NOW</button>
         </div>
     );
 };
