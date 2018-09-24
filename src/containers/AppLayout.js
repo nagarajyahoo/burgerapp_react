@@ -8,13 +8,7 @@ import classes from './AppLayout.css'
 
 class BurgerAppLayout extends Component {
     state = {
-        showSideDrawer: true
-    };
-
-    sideDrawClickHandler = () => {
-        this.setState({
-            showSideDrawer: false
-        });
+        showSideDrawer: false
     };
 
     toggleSideDraw = () => {
@@ -28,7 +22,7 @@ class BurgerAppLayout extends Component {
             <Aux>
                 <SideDrawer
                     displaySideDrawer={this.state.showSideDrawer}
-                    closed={this.sideDrawClickHandler}
+                    closed={this.toggleSideDraw}
                 />
                 <Toolbar
                     toggleSideDraw={this.toggleSideDraw}
