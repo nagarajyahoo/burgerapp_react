@@ -17,6 +17,12 @@
     height: 100%;
 }
 
+@media (max-width: 500px) {
+    .Toolbar nav {
+        display: none;
+    }
+}
+
 .Logo {
     height: 80%;
 }

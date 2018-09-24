@@ -7,11 +7,33 @@ import SideDrawer from '../navigation/sideDrawer/SideDrawer'
 import classes from './AppLayout.css'
 
 class BurgerAppLayout extends Component {
+    state = {
+        showSideDrawer: true
+    };
+
+    sideDrawClickHandler = () => {
+        this.setState({
+            showSideDrawer: false
+        });
+    };
+
+    toggleSideDraw = () => {
+        this.setState({
+            showSideDrawer: !this.state.showSideDrawer
+        });
+    };
+
     render() {
         return (
             <Aux>
-                <SideDrawer/>
-                <Toolbar/>
+                <SideDrawer
+                    displaySideDrawer={this.state.showSideDrawer}
+                    closed={this.sideDrawClickHandler}
+                />
+                <Toolbar
+                    toggleSideDraw={this.toggleSideDraw}
+                    showNavigation={!this.state.showSideDrawer}
+                />
                 <main className={classes.Content}>
                     <BurgerBuilderComponent/>
                 </main>
