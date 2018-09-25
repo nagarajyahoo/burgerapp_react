@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import Aux from '../../hoc/Aux';
 import Backdrop from '../backdrop/Backdrop';
-import Button from '../button/Button';
 import classes from './Modal.css'
 
 class Modal extends Component {
@@ -9,7 +8,6 @@ class Modal extends Component {
         return ((nextProps.show !== this.props.show) ||
             (nextProps.children !== this.props.children));
     }
-
 
     componentWillUpdate() {
         console.log('[Modal] : comp will update');
@@ -28,9 +26,6 @@ class Modal extends Component {
                     }}>
 
                     {this.props.children}
-
-                    <Button clicked={this.props.continuePurchase} type="Success">Continue</Button>
-                    <Button clicked={this.props.cancelPurchase} type="Danger">Cancel</Button>
                 </div>
             </Aux>
 

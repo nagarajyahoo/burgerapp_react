@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import Aux from '../../../../hoc/Aux'
+import Button from '../../../../ui/button/Button'
 
 class OrderSummary extends Component {
     componentWillUpdate() {
@@ -24,6 +25,8 @@ class OrderSummary extends Component {
                     {ingredientSummary}
                 </ul>
                 <p>Continue to Checkout?</p>
+                <Button clicked={this.props.continuePurchase} type="Success">Continue</Button>
+                <Button clicked={this.props.cancelPurchase} type="Danger">Cancel</Button>
             </Aux>
         );
     }
