@@ -98,7 +98,7 @@ class BurgerBuilderComponent extends Component {
             }
         };
 
-        axios.post('/orders.json', order)
+        axios.post('/orders.jsn', order)
             .then(res => {
                 console.log("success", res.status);
             })
@@ -122,7 +122,9 @@ class BurgerBuilderComponent extends Component {
         return (
             <div>
                 <Burger ingredients={this.state.ingredients}/>
-                <Modal show={this.state.purchasing}>
+                <Modal
+                    clicked={this.cancelPurchase}
+                    show={this.state.purchasing}>
                     {modalContent}
                 </Modal>
                 <IngredientsBuilder

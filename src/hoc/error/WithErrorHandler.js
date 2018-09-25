@@ -8,27 +8,34 @@ const withErrorHandler = (WrappedComponent, axios) => {
             error: null
         };
 
-        closeModal = () => {
+        acknowledgeErrorHandler = () => {
             this.setState({
-                error : null
+                error: null
             })
         };
 
         componentDidMount() {
-            axios.interceptors.response.use(null, err => {
-                console.error(err);
+            axios.interceptors.request.use(req => {
                 this.setState({
-                    error: err.message
+                    error: null
+                })
+            }, null);
+
+            axios.interceptors.response.use(null,
+                err => {
+                    console.error(err);
+                    this.setState({
+                        error: err.message
+                    });
+                    return Promise.reject(err);
                 });
-                return Promise.reject(err);
-            });
         }
 
         render() {
             return (
                 <Aux>
                     <Modal
-                        cancelPurchase={this.closeModal}
+                        clicked={this.acknowledgeErrorHandler}
                         show={this.state.error}>
                         {this.state.error}
                     </Modal>

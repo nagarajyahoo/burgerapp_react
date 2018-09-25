@@ -17,7 +17,7 @@ class Modal extends Component {
         return (
             <Aux>
                 <Backdrop show={this.props.show}
-                          cancelPurchase={this.props.cancelPurchase}/>
+                          clicked={this.props.clicked}/>
                 <div
                     className={classes.Modal}
                     style={{
