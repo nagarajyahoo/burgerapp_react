@@ -3,6 +3,8 @@ import Burger from '../../components/builder/burger/Burger'
 import IngredientsBuilder from '../../components/builder/IngredientsBuilder'
 import Modal from '../../ui/modal/Modal'
 import OrderSummary from '../../components/builder/order/ordersummary/OrderSummary'
+import axios from '../../interceptors/axios/Axios'
+import Spinner from '../../ui/spinner/Spinner'
 
 const INGREDIENTS_PRICE = {
     meat: 0.2,
@@ -21,7 +23,8 @@ class BurgerBuilderComponent extends Component {
         },
         totalPrice: 4,
         purchasable: false,
-        purchasing: false
+        purchasing: false,
+        processing: false
     };
 
     updatePurchasable = (currIngredients) => {
@@ -79,19 +82,47 @@ class BurgerBuilderComponent extends Component {
     };
 
     continuePurchase = () => {
+        this.setState({processing : true});
 
+        const order = {
+            ingredients : this.state.ingredients,
+            price : this.state.totalPrice,
+            customer : {
+                name : 'Nagaraj M R',
+                email: 'nmr@gmail.com',
+                address : {
+                    street : 'test street',
+                    city: 'Washington'
+                }
+            }
+        };
+
+        axios.post('/orders.json', order)
+            .then(res => {
+                console.log("success", res.status);
+            })
+            .catch(err => {
+                console.log("error", err);
+            })
+            .finally(() => {
+                this.setState({purchasing: false, processing: false});
+            });
     };
 
     render() {
+        const modalContent = this.state.processing ?
+            <Spinner/> :
+            <OrderSummary
+                ingredients={this.state.ingredients}
+                purchasing={this.state.purchasing}/>;
+
         return (
             <div>
                 <Burger ingredients={this.state.ingredients}/>
                 <Modal show={this.state.purchasing}
                        cancelPurchase={this.cancelPurchase}
                        continuePurchase={this.continuePurchase}>
-                    <OrderSummary
-                        ingredients={this.state.ingredients}
-                        purchasing={this.state.purchasing}/>
+                    {modalContent}
                 </Modal>
                 <IngredientsBuilder
                     totalPrice={this.state.totalPrice}
