@@ -1,0 +1,29 @@
+.CheckoutSummary {
+    height: 300px;
+    margin: 20px auto;
+    width: 50%;
+    text-align: center;
+    box-shadow: 0 2px 3px #ccc;
+    border: 1px solid #eee;
+    padding: 15px 10px;
+    box-sizing: border-box;
+}
+
+.CheckoutSummary input {
+    font: inherit;
+    display: block;
+    margin: 6px auto;
+    padding: 5px;
+}
+
+.CheckoutSummary textarea {
+    display: block;
+    padding: 5px;
+    font: inherit;
+    margin: auto;
+}
+
+.CheckoutSummary label {
+    font-weight: bold;
+    display: inline;
+}

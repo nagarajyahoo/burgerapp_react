@@ -1,0 +1,7 @@
+.BurgerDiv {
+    margin: 20px auto;
+    width: 50%;
+    text-align: center;
+    padding: 15px 10px;
+    box-sizing: border-box;
+}

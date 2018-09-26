@@ -16,6 +16,7 @@ const withErrorHandler = (WrappedComponent, axios) => {
 
         componentDidMount() {
             this.reqInteerceptor = axios.interceptors.request.use(req => {
+                console.log("url : ", req.baseURL, req.url);
                 this.setState({
                     error: null
                 });

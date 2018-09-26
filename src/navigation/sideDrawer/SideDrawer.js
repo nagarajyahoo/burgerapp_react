@@ -15,7 +15,7 @@ const sideDrawer = (props) => {
       <Aux>
           <Backdrop
               show={props.displaySideDrawer}
-              cancelPurchase={props.closed}
+              clicked={props.closed}
           />
           <div className={attachedClasses.join(' ')}>
               <div className={classes.Logo}>
