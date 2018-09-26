@@ -7,6 +7,7 @@ import {Route, Switch} from 'react-router-dom'
 
 import classes from './AppLayout.css'
 import CheckoutSummary from "../components/checkout/summary/CheckoutSummary";
+import Orders from "../components/orders/Orders";
 
 class BurgerAppLayout extends Component {
     state = {
@@ -34,6 +35,7 @@ class BurgerAppLayout extends Component {
                     <Switch>
                         <Route path='/burger' component={BurgerBuilderComponent}/>
                         <Route path='/checkout' component={CheckoutSummary}/>
+                        <Route path='/orders' component={Orders}/>
                         <Route path='/' component={BurgerBuilderComponent}/>
                     </Switch>
                 </main>

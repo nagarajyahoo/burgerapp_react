@@ -85,23 +85,11 @@ class BurgerBuilderComponent extends Component {
     continuePurchase = () => {
         this.setState({processing: true});
 
-        // const order = {
-        //     ingredients: this.state.ingredients,
-        //     price: this.state.totalPrice,
-        //     customer: {
-        //         name: 'Nagaraj M R',
-        //         email: 'nmr@gmail.com',
-        //         address: {
-        //             street: 'test street',
-        //             city: 'Washington'
-        //         }
-        //     }
-        // };
-
         let  queryParams = [];
         for(let param in this.state.ingredients) {
             queryParams.push(encodeURIComponent(param) + '=' + encodeURIComponent(this.state.ingredients[param]));
         }
+        queryParams.push('price=' + this.state.totalPrice);
         const queryString = queryParams.join('&');
 
         this.props.history.push({
