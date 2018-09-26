@@ -1,6 +1,9 @@
 import React, {Component} from 'react';
 import axios from '../../interceptors/axios/Axios'
 import Order from './order/Order'
+import Spinner from '../../ui/spinner/Spinner'
+import Aux from '../../hoc/Aux'
+import classes from './Orders.css'
 
 class Orders extends Component {
     state = {
@@ -9,6 +12,8 @@ class Orders extends Component {
     }
 
     componentDidMount() {
+        this.setState({loading: true});
+
         axios.get('/orders.json')
             .then(res => {
                 const fetchedOrders = [];
@@ -25,17 +30,19 @@ class Orders extends Component {
             });
     }
 
-    render () {
-        return (
+    render() {
+        const content = this.state.loading ?
+            <div className={classes.Loading}><Spinner/></div> :
             <div>
                 {this.state.orders.map(order => (
                     <Order
                         key={order.id}
                         ingredients={order.ingredients}
-                        price={order.price} />
+                        price={order.price}/>
                 ))}
-            </div>
-        );
+            </div>;
+
+        return (<Aux>{content}</Aux>);
     }
 }
 
