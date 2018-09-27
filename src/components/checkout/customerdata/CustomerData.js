@@ -5,6 +5,7 @@ import Spinner from '../../../ui/spinner/Spinner'
 import classes from './CustomerData.css'
 import axios from '../../../interceptors/axios/Axios'
 import withErrorHandler from "../../../hoc/error/WithErrorHandler";
+import {connect} from 'react-redux';
 
 class CustomerData extends Component {
     state = {
@@ -13,19 +14,12 @@ class CustomerData extends Component {
         processing: false
     };
 
-    componentDidMount = () => {
-        this.setState({
-            ingredients : this.props.ingredients,
-            totalPrice: this.props.price
-        });
-    };
-
     purchase = (event) => {
         event.preventDefault();
         this.setState({processing: true});
         const order = {
-            ingredients: this.state.ingredients,
-            price: this.state.totalPrice,
+            ingredients: this.props.ingredients,
+            price: this.props.totalPrice,
             customer: {
                 name: 'Nagaraj M R',
                 email: 'nmr@gmail.com',
@@ -71,4 +65,11 @@ class CustomerData extends Component {
     }
 }
 
-export default withErrorHandler(CustomerData, axios);
+const mapStateToProps = (state) => {
+    return {
+        ingredients: state.burger.ingredients,
+        totalPrice: state.burger.totalPrice
+    }
+};
+
+export default connect(mapStateToProps)(withErrorHandler(CustomerData, axios));

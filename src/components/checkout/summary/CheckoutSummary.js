@@ -33,7 +33,8 @@ class CheckoutSummary extends Component {
 
                 <Route
                     path={this.props.match.path + '/customerdata'}
-                    render={(props) => (<CustomerData ingredients={this.props.ingredients} price={this.props.totalPrice} {...props} />)} />
+                    // render={(props) => (<CustomerData ingredients={this.props.ingredients} price={this.props.totalPrice} {...props} />)} />
+                    component={CustomerData}/>
             </Aux>
         );
     }
