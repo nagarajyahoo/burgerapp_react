@@ -33,7 +33,7 @@ const ingredientsReducer = (state = initialState, action) => {
             };
         case actions.SET_INGREDIENTS:
             return {
-                ...state,
+                ...initialState,
                 ingredients: action.ingredients,
                 error: false
             };
