@@ -3,13 +3,15 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
-import {applyMiddleware, combineReducers, createStore, compose} from 'redux'
+import {applyMiddleware, combineReducers, compose, createStore} from 'redux'
 import {Provider} from 'react-redux';
 import thunk from 'redux-thunk'
 import ingredientsReducer from './model/store/reducer/IngredientsReducer'
+import ordersReducer from './model/store/reducer/OdersReducer'
 
 const rootReducer = combineReducers({
-    burger: ingredientsReducer
+    burger: ingredientsReducer,
+    orders: ordersReducer
 });
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

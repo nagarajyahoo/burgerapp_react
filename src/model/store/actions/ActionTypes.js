@@ -7,5 +7,6 @@ export {
 
 export {
     FETCH_ALL_ORDERS,
-    CREATE_ORDER
+    CREATE_ORDER,
+    PROCESSING
 } from './OrderActions';

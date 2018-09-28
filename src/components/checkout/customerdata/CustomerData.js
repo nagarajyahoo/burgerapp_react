@@ -6,17 +6,14 @@ import classes from './CustomerData.css'
 import axios from '../../../interceptors/axios/Axios'
 import withErrorHandler from "../../../hoc/error/WithErrorHandler";
 import {connect} from 'react-redux';
+import * as OrderActions from '../../../model/store/actions/OrderActions'
 
 class CustomerData extends Component {
-    state = {
-        ingredients: null,
-        totalPrice: null,
-        processing: false
-    };
 
     purchase = (event) => {
         event.preventDefault();
-        this.setState({processing: true});
+        this.props.processingOrder();
+
         const order = {
             ingredients: this.props.ingredients,
             price: this.props.totalPrice,
@@ -30,20 +27,11 @@ class CustomerData extends Component {
             }
         };
 
-        axios.post('/orders.json', order)
-            .then(res => {
-                console.log("success", res.status);
-            })
-            .catch(err => {
-                console.log("error", err);
-            })
-            .finally(() => {
-                this.setState({processing: false});
-            });
+        this.props.createOrder(order);
     };
 
     render() {
-        const content = this.state.processing ?
+        const content = this.props.processing ?
             <Spinner /> :
             <form>
                 <div className={classes.CheckoutSummary}>
@@ -68,8 +56,16 @@ class CustomerData extends Component {
 const mapStateToProps = (state) => {
     return {
         ingredients: state.burger.ingredients,
-        totalPrice: state.burger.totalPrice
+        totalPrice: state.burger.totalPrice,
+        processing: state.orders.processing
     }
 };
 
-export default connect(mapStateToProps)(withErrorHandler(CustomerData, axios));
+const mapDispatchToProps = (dispatch) => {
+    return {
+        createOrder : (order) => dispatch(OrderActions.createOrder(order)),
+        processingOrder : () => dispatch({type: OrderActions.PROCESSING})
+    }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(CustomerData, axios));
