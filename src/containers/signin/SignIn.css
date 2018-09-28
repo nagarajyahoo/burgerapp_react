@@ -1,0 +1,33 @@
+.SignIn {
+    width: 30%;
+    height: 50%;
+    margin: auto;
+    box-sizing: border-box;
+    border: 1px solid lightgray;
+    box-shadow: 1px 1px #DAD735;
+}
+
+.SignIn input {
+    outline: none;
+    border: 1px solid #ccc;
+    background-color: white;
+    font: inherit;
+    padding: 6px 10px;
+    display: block;
+    width: 80%;
+    box-sizing: border-box;
+    margin: 10px auto;
+}
+
+.SignIn button {
+    outline: none;
+    border: 1px solid #ccc;
+    background-color: green;
+    font: inherit;
+    color: white;
+    padding: 6px 10px;
+    display: block;
+    width: 20%;
+    box-sizing: border-box;
+    margin: 10px auto;
+}

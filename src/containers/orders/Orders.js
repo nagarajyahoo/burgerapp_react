@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import Order from './order/Order'
+import Order from '../../components/orders/order/Order'
 import Spinner from '../../ui/spinner/Spinner'
 import Aux from '../../hoc/Aux'
 import classes from './Orders.css'
@@ -7,7 +7,6 @@ import * as OrderActions from '../../model/store/actions/OrderActions'
 import {connect} from 'react-redux'
 
 class Orders extends Component {
-
     componentDidMount() {
         this.props.fetchOrders();
     }

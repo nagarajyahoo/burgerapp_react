@@ -7,6 +7,7 @@ const navigationItems = (props) => {
         <ul className={classes.NavigationItems}>
             <NavigationItem label='Burger' url='/burger'/>
             <NavigationItem label='Orders' url='/orders'/>
+            <NavigationItem label='Sign In' url='/signin'/>
         </ul>
     );
 };
