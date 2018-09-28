@@ -1,13 +1,9 @@
-import * as actions from '../actions/IngredientsAction';
+import * as actions from '../actions/IngredientActions';
 
 const initialState = {
-    ingredients: {
-        meat: 0,
-        salad: 0,
-        cheese: 0,
-        bacon: 0
-    },
-    totalPrice: 4
+    ingredients: {},
+    totalPrice: 4,
+    error: false
 };
 
 const INGREDIENTS_PRICE = {
@@ -29,12 +25,22 @@ const ingredientsReducer = (state = initialState, action) => {
                 ingredients: {...currIngredients},
                 totalPrice: state.totalPrice + INGREDIENTS_PRICE[action.ingredient]
             };
-        case
-        actions.DEL_INGREDIENT:
+        case actions.DEL_INGREDIENT:
             currIngredients[action.ingredient] = currCount - 1;
             return {
                 ingredients: {...currIngredients},
                 totalPrice: state.totalPrice - INGREDIENTS_PRICE[action.ingredient]
+            };
+        case actions.SET_INGREDIENTS:
+            return {
+                ...state,
+                ingredients: action.ingredients,
+                error: false
+            };
+        case actions.LOADING_INGREDIENTS_FAILED:
+            return {
+                ...state,
+                error: true
             };
         default:
             return {...state};

@@ -6,7 +6,7 @@ import OrderSummary from '../../components/builder/order/ordersummary/OrderSumma
 import axios from '../../interceptors/axios/Axios'
 import Spinner from '../../ui/spinner/Spinner'
 import withErrorHandler from '../../hoc/error/WithErrorHandler'
-import * as IngredientActions from '../../model/store/actions/IngredientsAction'
+import * as IngredientActions from '../../model/store/actions/IngredientActions'
 import {connect} from 'react-redux'
 
 
@@ -18,17 +18,21 @@ class BurgerBuilderComponent extends Component {
 
     isPurchasable = () => {
         const currIngredients = this.props.ingredients;
+        if(currIngredients) {
+            const sum = Object.keys(currIngredients)
+                .map(inKey => {
+                    return currIngredients[inKey]
+                })
+                .reduce((eleSum, ele) => {
+                    eleSum += ele;
+                    return eleSum;
+                }, 0);
 
-        const sum = Object.keys(currIngredients)
-            .map(inKey => {
-                return currIngredients[inKey]
-            })
-            .reduce((eleSum, ele) => {
-                eleSum += ele;
-                return eleSum;
-            }, 0);
-
-        return sum > 0;
+            return sum > 0;
+        }
+        else {
+            return false;
+        }
     };
 
     addIngredient = (type) => {
@@ -54,6 +58,10 @@ class BurgerBuilderComponent extends Component {
             pathname: '/checkout'
         });
     };
+
+    componentDidMount() {
+        this.props.resetIngredients();
+    }
 
     render() {
         const modalContent = this.state.processing ?
@@ -88,14 +96,16 @@ class BurgerBuilderComponent extends Component {
 const mapStateToProps = (state) => {
     return {
         ingredients: state.burger.ingredients,
-        totalPrice: state.burger.totalPrice
+        totalPrice: state.burger.totalPrice,
+        error: state.burger.error
     }
 };
 
-const mapDispatchToProps = (dispath) => {
+const mapDispatchToProps = (dispatch) => {
     return {
-        addIngredient: (ingredient) => dispath(IngredientActions.addIngredient(ingredient)),
-        removeIngredient: (ingredient) => dispath(IngredientActions.delIngredient(ingredient))
+        addIngredient: (ingredient) => dispatch(IngredientActions.addIngredient(ingredient)),
+        removeIngredient: (ingredient) => dispatch(IngredientActions.delIngredient(ingredient)),
+        resetIngredients: () => dispatch(IngredientActions.resetIngredients())
     }
 };
 
