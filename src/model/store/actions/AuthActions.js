@@ -42,9 +42,11 @@ export const login = (email, password) => {
 
         axios.post(url, authData)
             .then(res => {
+                console.log(res);
                 dispatch(loginSuccessful(authData))
             })
             .catch(err => {
+                console.log(err);
                 dispatch(loginFailed())
             });
     }
@@ -61,9 +63,11 @@ export const signup = (email, password) => {
 
         axios.post(url, authData)
             .then(res => {
+                console.log(res);
                 dispatch(signupSuccessful(authData))
             })
             .catch(err => {
+                console.log(err);
                 dispatch(signupFailed())
             });
     }

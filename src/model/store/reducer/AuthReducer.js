@@ -17,7 +17,8 @@ const authReducer = (state = initialState, action) => {
         case Actions.SIGNUP_FAILED:
         default:
             return {
-                ...state
+                ...state,
+                processing: false
             }
     }
 };

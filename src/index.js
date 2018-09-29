@@ -13,7 +13,7 @@ import authReducer from "./model/store/reducer/AuthReducer";
 const rootReducer = combineReducers({
     burger: ingredientsReducer,
     orders: ordersReducer,
-    auth: authReducer
+    myauth: authReducer
 });
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
