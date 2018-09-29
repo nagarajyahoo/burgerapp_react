@@ -14,6 +14,7 @@
     box-sizing: border-box;
     height: 100%;
     display: block;
+    text-wrap: avoid;
 }
 
 .NavigationItem a:active,
@@ -40,6 +41,7 @@
         box-sizing: border-box;
         height: 100%;
         display: block;
+        text-wrap: avoid;
     }
 
     .NavigationItem a:active,

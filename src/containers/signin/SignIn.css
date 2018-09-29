@@ -19,15 +19,19 @@
     margin: 10px auto;
 }
 
-.SignIn button {
+.ButtonDiv {
+    display: flex;
+}
+
+.ButtonDiv button {
     outline: none;
     border: 1px solid #ccc;
     background-color: green;
     font: inherit;
     color: white;
     padding: 6px 10px;
-    display: block;
     width: 20%;
     box-sizing: border-box;
     margin: 10px auto;
+    display: block;
 }

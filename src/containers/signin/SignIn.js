@@ -1,22 +1,16 @@
 import React, {Component} from 'react';
 import classes from './SignIn.css'
 import ReactTooltip from 'react-tooltip'
+import * as AuthActions from '../../model/store/actions/AuthActions'
+import {connect} from 'react-redux'
 
 class SignIn extends Component {
     state = {
         email: {
-            value: '',
-            config: {
-                maxLength: 9,
-                minLength: 2
-            }
+            value: ''
         },
         password: {
-            value: '',
-            config: {
-                maxLength: 9,
-                minLength: 2
-            }
+            value: ''
         }
     };
 
@@ -36,8 +30,11 @@ class SignIn extends Component {
                                value={this.state.password.value}
                                data-tip="Please enter password"
                         />
+                        <div className={classes.ButtonDiv}>
+                            <button type="button" onClick={() => this.login()}>Signin</button>
+                        </div>
                     </form>
-                    <button type="submit" onClick={() => this.login()}>Sign In</button>
+
                     <ReactTooltip/>
                 </div>
 
@@ -51,8 +48,22 @@ class SignIn extends Component {
     }
 
     login = () => {
-        alert(this.state.email)
+        this.props.signup(this.state.email, this.state.password);
     }
 }
 
-export default SignIn;
+const mapStateToProps = (state) => {
+    return {
+        processing: state.auth.processing
+    }
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        login: (email, password) => dispatch(AuthActions.login(email, password)),
+        signup: (email, password) => dispatch(AuthActions.signup(email, password)),
+    }
+};
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignIn);
