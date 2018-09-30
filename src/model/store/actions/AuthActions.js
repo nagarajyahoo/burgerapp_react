@@ -18,9 +18,10 @@ export const signupSuccessful = (authData) => {
     }
 };
 
-export const signupFailed = () => {
+export const signupFailed = (error) => {
     return {
-        type: SIGNUP_FAILED
+        type: SIGNUP_FAILED,
+        error: error
     }
 };
 
@@ -43,11 +44,11 @@ export const login = (email, password) => {
         axios.post(url, authData)
             .then(res => {
                 console.log(res);
-                dispatch(loginSuccessful(authData))
+                dispatch(loginSuccessful(res.data))
             })
             .catch(err => {
-                console.log(err);
-                dispatch(loginFailed())
+                console.log(err.response.data);
+                dispatch(loginFailed(err.message))
             });
     }
 };
@@ -64,17 +65,18 @@ export const signup = (email, password) => {
         axios.post(url, authData)
             .then(res => {
                 console.log(res);
-                dispatch(signupSuccessful(authData))
+                dispatch(signupSuccessful(res.data))
             })
             .catch(err => {
                 console.log(err);
-                dispatch(signupFailed())
+                dispatch(signupFailed(err.message))
             });
     }
 };
 
-export const loginFailed = () => {
+export const loginFailed = (error) => {
     return {
-        type: LOGIN_FAILED
+        type: LOGIN_FAILED,
+        error: error
     }
 };

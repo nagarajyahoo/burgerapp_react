@@ -34,4 +34,29 @@
     box-sizing: border-box;
     margin: 10px auto;
     display: block;
+    word-wrap: break-word;
+}
+
+.ButtonDiv2 button {
+    outline: none;
+    border: 1px transparent;
+    background-color: transparent;
+    font: inherit;
+    color: black;
+    text-decoration: underline;
+    padding: 6px 10px;
+    width: 100%;
+    box-sizing: border-box;
+    margin: 10px auto;
+    display: block;
+    word-wrap: break-word;
+}
+
+.Error {
+    width: 100%;
+    box-sizing: border-box;
+    margin: auto;
+    padding: auto;
+    color: red;
+    text-align: center;
 }

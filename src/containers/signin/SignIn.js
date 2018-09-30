@@ -8,18 +8,20 @@ import Aux from "../../hoc/Aux";
 
 class SignIn extends Component {
     state = {
-        email: {
-        },
-        password: {
-        },
+        email: {},
+        password: {},
         isNewUser: false
     };
 
     render() {
-        const buttonText = this.state.isNewUser ? 'Signup' : 'Signin';
+        const loginButtonText = this.state.isNewUser ? 'Signup' : 'Signin';
+        const newUserButtonText = this.state.isNewUser ? 'Existing User' : 'New User';
         const content = this.props.processing ?
             <Spinner/> :
             <Aux>
+                <div className={classes.Error}>
+                    <p>{this.props.error}</p>
+                </div>
                 <form>
                     <input type='email'
                            onChange={(event) => this.validateAndSetVal(event, 'email')}
@@ -34,9 +36,10 @@ class SignIn extends Component {
                            data-tip="Please enter password"
                     />
                     <div className={classes.ButtonDiv}>
-                        <button type="button" onClick={() => this.authenticate()}>
-                            {buttonText}
-                        </button>
+                        <button type="button" onClick={() => this.authenticate()}>{loginButtonText}</button>
+                    </div>
+                    <div className={classes.ButtonDiv2}>
+                        <button type='button' onClick={() => this.swithType()}>{newUserButtonText}</button>
                     </div>
                 </form>
 
@@ -60,11 +63,18 @@ class SignIn extends Component {
             this.props.login(this.state.email, this.state.password);
         }
     }
+
+    swithType = () => {
+        this.setState({
+            isNewUser: !this.state.isNewUser
+        });
+    }
 }
 
 const mapStateToProps = (state) => {
     return {
-        processing: state.myauth.processing
+        processing: state.myauth.processing,
+        error: state.myauth.error
     }
 };
 
